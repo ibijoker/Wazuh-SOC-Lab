@@ -1,16 +1,24 @@
-Wazuh Detection Engineering: FIM Escalation Pipeline
-Overview
-This project documents the development of a custom security detection pipeline within a Wazuh-based Security Operations Center (SOC) home lab. The objective was to improve incident prioritization by escalating standard File Integrity Monitoring (FIM) alerts for high-value system configuration files from generic logs to actionable, critical-severity incidents.
+# Wazuh Detection Engineering: FIM Escalation Lab
 
-Technical Implementation
-Target Asset: Windows hosts file (C:\Windows\System32\drivers\etc\hosts).
+## Project Overview
+This project demonstrates the design and implementation of an end-to-end security monitoring and automated incident response pipeline. By deploying File Integrity Monitoring (FIM), I established a controlled environment to detect, visualize, and automatically respond to unauthorized modifications of critical Windows system files in real-time.
 
-Strategy: Implemented a custom rule in local_rules.xml using overwrite="yes" to intercept Rule 550 and re-classify the event.
+## Architecture
+The lab utilizes a multi-platform architecture to simulate professional SOC workflows:
+**Windows Host (Wazuh Agent) -> Wazuh Manager (Detection Engine) -> SMTP Alerting**
 
-Resolution: Resolved path matching issues by utilizing the <match> tag with case-insensitive logic to ensure reliable alert escalation.
+*   **Wazuh Agent:** Monitors critical system paths and reports integrity changes.
+*   **Wazuh Manager:** Processes events, applies custom rule overrides, and manages alert severity.
+*   **Automated Response:** Configured SMTP integration for real-time security alerts (SOAR workflow).
 
-Custom Rule Definition
-XML
+## Key Skills
+*   **Detection Engineering:** Creating and testing custom rules to reduce noise and escalate critical alerts.
+*   **FIM (File Integrity Monitoring):** Monitoring system-critical assets for unauthorized changes.
+*   **Incident Response:** Configuring SMTP/TLS for automated security notifications.
+*   **MITRE ATT&CK:** Mapping detections to specific adversarial tactics (T1565.001 - Data Manipulation).
+
+## Custom Rule Implementation
+```xml
 <group name="fim,windows">
   <rule id="100002" level="12" overwrite="yes">
     <if_sid>550</if_sid>
@@ -24,6 +32,20 @@ XML
 </group>
 Lab Visualization & Evidence
 1. Rule Registration
+Confirmation that the custom rule has been successfully registered and active within the Wazuh manager.
+
 2. Critical Alert Verification
+Wazuh dashboard showing the successful escalation of the integrity violation to a Level 12 (Critical) alert.
+
 3. Email Notification Workflow
+Configuration of SMTP settings to enable real-time automated security notifications.
+
 4. Alert Captured in Inbox
+Real-time security notification received via email, demonstrating the complete detection and response pipeline.
+
+Testing & Validation
+To validate the detection pipeline, I simulated an unauthorized modification to the Windows hosts file:
+
+Bash
+# Modifying hosts file to trigger FIM alert
+echo "127.0.0.1 malicious-site.com" >> C:\Windows\System32\drivers\etc\hosts
