@@ -30,21 +30,23 @@ The lab utilizes a multi-platform architecture to simulate professional SOC work
     </mitre>
   </rule>
 </group>
-Lab Visualization & Evidence
-1. Rule Registration
-Confirmation that the custom rule has been successfully registered and active within the Wazuh manager.
+## Lab Visualization & Evidence
 
-2. Critical Alert Verification
-Wazuh dashboard showing the successful escalation of the integrity violation to a Level 12 (Critical) alert.
+### 1. Rule Registration
+![Rule Dashboard](dashboard.png)
+*Confirmation that the custom rule has been successfully registered and active within the Wazuh manager.*
 
-3. Email Notification Workflow
-Configuration of SMTP settings to enable real-time automated security notifications.
+### 2. Critical Alert Verification
+![Alert List](alert_dashboard.png)
+*Wazuh dashboard showing the successful escalation of the integrity violation to a Level 12 (Critical) alert.*
 
-4. Alert Captured in Inbox
-Real-time security notification received via email, demonstrating the complete detection and response pipeline.
+### 3. Email Notification Workflow
+![Email Setup](email_setup_.png)
+*Configuration of SMTP settings to enable real-time automated security notifications.*
 
-Testing & Validation
-To validate the detection pipeline, I simulated an unauthorized modification to the Windows hosts file:
+### 4. Alert Captured in Inbox
+![Alert Mail](alert_mail.png)
+*Real-time security notification received via email, demonstrating the complete detection and response pipeline.*
 
 Bash
 # Modifying hosts file to trigger FIM alert
