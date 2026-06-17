@@ -5,7 +5,6 @@ This project demonstrates the design and implementation of an end-to-end securit
 
 ## Architecture
 **Windows Host (Wazuh Agent) -> Wazuh Manager (Detection Engine) -> SMTP Alerting**
-
 * **Wazuh Agent:** Monitors critical system paths and reports integrity changes.
 * **Wazuh Manager:** Processes events, applies custom rule overrides, and manages alert severity.
 * **Automated Response:** Configured SMTP integration for real-time security alerts.
@@ -23,13 +22,25 @@ This project demonstrates the design and implementation of an end-to-end securit
     </mitre>
   </rule>
 </group>
-Lab Visualization & Evidence
-1. Rule Registration
-2. Critical Alert Verification
-3. Email Notification Workflow
-4. Alert Captured in Inbox
-Testing & Validation
+```
+
+## Lab Visualization & Evidence
+
+### 1. Rule Registration
+![Rule Registration](alert_dashboard.png)
+
+### 2. Critical Alert Verification
+![Critical Alert Verification](alert_mail.png)
+
+### 3. Email Notification Workflow
+![Email Notification Workflow](email_setup_.png)
+
+### 4. Alert Captured in Inbox
+![Alert Captured in Inbox](dashboard.png)
+
+## Testing & Validation
 To validate the detection pipeline, I simulated an unauthorized modification to the Windows hosts file using the following command:
 
-Bash
+```bash
 echo "127.0.0.1 malicious-site.com" >> C:\Windows\System32\drivers\etc\hosts
+```
