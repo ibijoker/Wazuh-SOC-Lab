@@ -1,18 +1,16 @@
-# Wazuh Detection Engineering: FIM Escalation Pipeline
-
-## Overview
+Wazuh Detection Engineering: FIM Escalation Pipeline
+Overview
 This project documents the development of a custom security detection pipeline within a Wazuh-based Security Operations Center (SOC) home lab. The objective was to improve incident prioritization by escalating standard File Integrity Monitoring (FIM) alerts for high-value system configuration files from generic logs to actionable, critical-severity incidents.
 
-## Technical Challenge
-The default Wazuh FIM rule (ID 550) triggers for any monitored file modification, creating significant "noise" in a production environment. Additionally, I encountered path normalization issues where the system path was being evaluated in lowercase, causing custom rules to fail to match the specific file being targeted.
+Technical Implementation
+Target Asset: Windows hosts file (C:\Windows\System32\drivers\etc\hosts).
 
-## Implementation
-* **Target Asset**: Windows hosts file (C:\Windows\System32\drivers\etc\hosts).
-* **Strategy**: Implemented a custom rule in local_rules.xml using overwrite="yes" to intercept Rule 550 and re-classify the event.
-* **Resolution**: Resolved path matching issues by utilizing the <match> tag with case-insensitive logic to ensure reliable alert escalation.
+Strategy: Implemented a custom rule in local_rules.xml using overwrite="yes" to intercept Rule 550 and re-classify the event.
 
-## Custom Rule Definition
-```xml
+Resolution: Resolved path matching issues by utilizing the <match> tag with case-insensitive logic to ensure reliable alert escalation.
+
+Custom Rule Definition
+XML
 <group name="fim,windows">
   <rule id="100002" level="12" overwrite="yes">
     <if_sid>550</if_sid>
@@ -24,4 +22,8 @@ The default Wazuh FIM rule (ID 550) triggers for any monitored file modification
     </mitre>
   </rule>
 </group>
-ResultsBy mapping this event to the MITRE ATT&CK Tactic: Impact (T1565.001 - Data Manipulation), the security team is now immediately notified of unauthorized modifications to this critical file via a Level 12 (Critical) alert.VerificationAlert LevelRule IDDescription7 (Medium)550Integrity checksum changed (Default)12 (Critical)100002CRITICAL: Unauthorized modification to Windows hosts file!
+Lab Visualization & Evidence
+1. Rule Registration
+2. Critical Alert Verification
+3. Email Notification Workflow
+4. Alert Captured in Inbox
