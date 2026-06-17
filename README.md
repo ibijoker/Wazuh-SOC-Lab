@@ -26,17 +26,21 @@ This project demonstrates the design and implementation of an end-to-end securit
 
 ## Lab Visualization & Evidence
 
-### 1. Rule Registration
-![Rule Registration](alert_dashboard.png)
+### 1. Wazuh Agent Dashboard — Endpoint Overview (DESKTOP-IOEG4IG)
+*Active agent registered with MITRE ATT&CK and Compliance mapping visible*
+![Wazuh Agent Dashboard](dashboard.png)
 
-### 2. Critical Alert Verification
-![Critical Alert Verification](alert_mail.png)
+### 2. Critical Alert Triggered — Rule 100002 Fired (Level 12)
+*Stored Data Manipulation panel showing 1 hit for T1565.001 (Impact) at 02:32:30*
+![Critical Alert Verification](alert_dashboard.png)
 
-### 3. Email Notification Workflow
+### 3. SMTP Email Setup & Test — Postfix Configuration on Wazuh Server
+*Terminal output confirming mailx installation and successful test email sent via Postfix*
 ![Email Notification Workflow](email_setup_.png)
 
-### 4. Alert Captured in Inbox
-![Alert Captured in Inbox](dashboard.png)
+### 4. Alert Captured in Inbox — Outlook Notification
+*Wazuh email notification received confirming Rule 100002 fired for unauthorized hosts file modification*
+![Alert Captured in Inbox](alert_mail.png)
 
 ## Testing & Validation
 To validate the detection pipeline, I simulated an unauthorized modification to the Windows hosts file using the following command:
